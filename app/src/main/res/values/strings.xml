@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WhereDatingApp</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+    <string name="default_co">0.0</string>
+    <string name="buscar">Buscar</string>
+    <string name="button">Button</string>
+    <string name="calcular">Calcular</string>
+    <string name="hola">Hola</string>
+</resources>
