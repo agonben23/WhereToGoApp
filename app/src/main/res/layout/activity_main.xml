@@ -107,7 +107,6 @@
         android:layout_width="134dp"
         android:layout_height="69dp"
         android:text="@string/calcular"
-        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -116,7 +115,7 @@
         app:layout_constraintVertical_bias="0.438" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editText"
         android:layout_width="94dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -130,7 +129,7 @@
         app:layout_constraintVertical_bias="0.142" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editText2"
         android:layout_width="94dp"
         android:layout_height="53dp"
         android:ems="10"

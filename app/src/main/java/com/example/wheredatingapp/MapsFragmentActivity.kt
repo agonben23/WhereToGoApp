@@ -1,17 +1,17 @@
 package com.example.wheredatingapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
+import com.example.wheredatingapp.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.wheredatingapp.databinding.ActivityMapsBinding
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsFragmentActivity : AppCompatActivity(), OnMapReadyCallback {
+
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -49,32 +49,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val puntoMedio = LatLng(latitud, longitud)
         mMap.addMarker(MarkerOptions().position(puntoMedio).title("Punto Medio"))
-
-        var ciudadEncontrada = true
-        var contador = 1
-
-        do {
-
-            val nombreCiudad = bundle.get("ciudad$contador")
-
-            val latitudCiudad = bundle.get("latitudCiudad$contador")
-            val longitudCiudad = bundle.get("longitudCiudad$contador")
-
-
-            if (nombreCiudad != null && latitudCiudad != null && longitudCiudad != null){
-                val punto = LatLng(latitudCiudad as Double,longitudCiudad as Double)
-
-                mMap.addMarker(MarkerOptions().position(punto).title(nombreCiudad.toString()))
-            }else{
-                ciudadEncontrada = false
-            }
-
-            contador++
-
-        }while (ciudadEncontrada)
-
         mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoMedio))
 
         mMap.uiSettings.isZoomControlsEnabled = true
     }
+
+
+
 }

@@ -1,10 +1,10 @@
 package com.example.wheredatingapp
 
+import Ciudad
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -19,22 +19,53 @@ class MainActivity : AppCompatActivity() {
         val buttonSearch2 : Button = findViewById(R.id.buttonSearch2)
         val buttonCalculate : Button = findViewById(R.id.buttonCalculate)
 
-        buttonSearch1.setOnClickListener { setPosition(R.id.editTextTextPersonName,R.id.lat1,R.id.lon1) }
-        buttonSearch2.setOnClickListener { setPosition(R.id.editTextTextPersonName2,R.id.lat2,R.id.lon2) }
-        buttonCalculate.setOnClickListener { setMapLocatition() }
+        var ciudad1 : Ciudad? = getCiudad(R.id.editText)
+        var ciudad2 : Ciudad? = getCiudad(R.id.editText2)
+
+        buttonSearch1.setOnClickListener {
+            setPosition(R.id.editText,R.id.lat1,R.id.lon1)
+            ciudad1 = getCiudad(R.id.editText)
+        }
+        buttonSearch2.setOnClickListener {
+            setPosition(R.id.editText2,R.id.lat2,R.id.lon2)
+            ciudad2 = getCiudad(R.id.editText2)
+        }
+        buttonCalculate.setOnClickListener { setMapLocatitions(listOf(ciudad1,ciudad2)) }
     }
 
-    fun setMapLocatition(){
+    private fun setMapLocatitions(lisCiudades : List<Ciudad?>){
 
-        val intent = Intent(this,MapsActivity::class.java)
+        if (lisCiudades.all { it != null }) {
 
-        val punto = calculatePosition()
+            val intent = Intent(this, MapsActivity::class.java)
 
-        intent.putExtra("latitudResultado",punto.latitud)
-        intent.putExtra("longitudResultado",punto.longitud)
+            val punto = calculatePosition()
 
-        startActivity(intent)
+            intent.putExtra("latitudResultado", punto.latitud)
+            intent.putExtra("longitudResultado", punto.longitud)
 
+            var contadorCiudades = 1
+
+            for (ciudad in lisCiudades){
+                intent.putExtra("ciudad$contadorCiudades",ciudad?.nombre)
+                intent.putExtra("latitudCiudad$contadorCiudades", ciudad?.latitud)
+                intent.putExtra("longitudCiudad$contadorCiudades", ciudad?.longitud)
+                contadorCiudades++
+            }
+
+            startActivity(intent)
+        }
+
+    }
+
+    private fun getCiudad(idEditText : Int) : Ciudad?{
+        val editText : EditText = findViewById(idEditText)
+
+        val ciudadNombre = editText.text
+
+        val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
+
+        return lisCiudades.find { it.nombre == ciudadNombre.toString() }
     }
 
     private fun setPosition(idEditText : Int,idLat : Int,idLong: Int){
