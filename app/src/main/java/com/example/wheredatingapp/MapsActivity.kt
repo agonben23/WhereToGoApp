@@ -73,6 +73,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }while (ciudadEncontrada)
 
+        val ciudadMasProxima = bundle.get("CiudadMasProxima")
+        val latitudCiudadMasProxima = bundle.get("LatitudCiudadMasProxima")
+        val longitudCiudadMasProxima = bundle.get("LongitudCiudadMasProxima")
+
+        if (ciudadMasProxima != null && latitudCiudadMasProxima != null && longitudCiudadMasProxima != null){
+            val punto = LatLng(latitudCiudadMasProxima as Double,longitudCiudadMasProxima as Double)
+
+            mMap.addMarker(MarkerOptions().position(punto).title("Ciudad más proxima al punto medio : $ciudadMasProxima"))
+        }
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoMedio))
 
         mMap.uiSettings.isZoomControlsEnabled = true

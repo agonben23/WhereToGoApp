@@ -1,6 +1,6 @@
 package com.example.wheredatingapp
 
-import Ciudad
+import com.example.wheredatingapp.model.Ciudad
 
 class ReaderCiudades(private val text : String) {
 

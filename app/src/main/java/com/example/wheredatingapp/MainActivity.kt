@@ -1,6 +1,6 @@
 package com.example.wheredatingapp
 
-import Ciudad
+import com.example.wheredatingapp.model.Ciudad
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -30,10 +30,22 @@ class MainActivity : AppCompatActivity() {
             setPosition(R.id.editText2,R.id.lat2,R.id.lon2)
             ciudad2 = getCiudad(R.id.editText2)
         }
-        buttonCalculate.setOnClickListener { setMapLocatitions(listOf(ciudad1,ciudad2)) }
+        buttonCalculate.setOnClickListener {
+
+            val puntoMedio = calculatePosition()
+
+            val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
+
+            val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades)
+
+            if (ciudadMasProxima != null){
+                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima)
+            }
+
+        }
     }
 
-    private fun setMapLocatitions(lisCiudades : List<Ciudad?>){
+    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad){
 
         if (lisCiudades.all { it != null }) {
 
@@ -52,6 +64,10 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("longitudCiudad$contadorCiudades", ciudad?.longitud)
                 contadorCiudades++
             }
+
+            intent.putExtra("CiudadMasProxima",ciudadMasProxima.nombre)
+            intent.putExtra("LatitudCiudadMasProxima",ciudadMasProxima.latitud)
+            intent.putExtra("LongitudCiudadMasProxima",ciudadMasProxima.longitud)
 
             startActivity(intent)
         }
@@ -84,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             textLat.text = ciudad.latitud.toString()
             textLong.text = ciudad.longitud.toString()
         }else{
-            Toast.makeText(this, "Ciudad no encontrada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "com.example.wheredatingapp.model.Ciudad no encontrada", Toast.LENGTH_SHORT).show()
         }
 
     }
