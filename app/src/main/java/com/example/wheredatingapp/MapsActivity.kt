@@ -10,11 +10,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.wheredatingapp.databinding.ActivityMapsBinding
+import com.example.wheredatingapp.ui.Icons
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private val context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,9 +81,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val longitudCiudadMasProxima = bundle.get("LongitudCiudadMasProxima")
 
         if (ciudadMasProxima != null && latitudCiudadMasProxima != null && longitudCiudadMasProxima != null){
-            val punto = LatLng(latitudCiudadMasProxima as Double,longitudCiudadMasProxima as Double)
+            val puntoCiudadMasProximaAlPuntoMedio = LatLng(latitudCiudadMasProxima as Double,longitudCiudadMasProxima as Double)
 
-            mMap.addMarker(MarkerOptions().position(punto).title("Ciudad más proxima al punto medio : $ciudadMasProxima"))
+            mMap.addMarker(MarkerOptions().position(puntoCiudadMasProximaAlPuntoMedio).title("Ciudad más proxima al punto medio : $ciudadMasProxima"))
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoMedio))

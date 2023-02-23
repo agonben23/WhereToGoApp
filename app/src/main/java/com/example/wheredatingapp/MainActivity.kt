@@ -1,19 +1,33 @@
 package com.example.wheredatingapp
 
-import com.example.wheredatingapp.model.Ciudad
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.wheredatingapp.model.Ciudad
+import com.example.wheredatingapp.model.reader.ReaderWeb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+
+    private var lisCiudades: List<Ciudad> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
+
+        scope.launch {
+            lisCiudades = ReaderWeb.leerCiudades()
+        }
 
         val buttonSearch1 : Button = findViewById(R.id.buttonSearch1)
         val buttonSearch2 : Button = findViewById(R.id.buttonSearch2)
@@ -34,9 +48,7 @@ class MainActivity : AppCompatActivity() {
 
             val puntoMedio = calculatePosition()
 
-            val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
-
-            val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades)
+            val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades as ArrayList<Ciudad>)
 
             if (ciudadMasProxima != null){
                 setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima)
@@ -79,8 +91,6 @@ class MainActivity : AppCompatActivity() {
 
         val ciudadNombre = editText.text
 
-        val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
-
         return lisCiudades.find { it.nombre == ciudadNombre.toString() }
     }
 
@@ -91,8 +101,6 @@ class MainActivity : AppCompatActivity() {
         val editText : EditText = findViewById(idEditText)
 
         val ciudadNombre = editText.text
-
-        val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
 
         if (lisCiudades.any { it.nombre == ciudadNombre.toString() }){
             val ciudad = lisCiudades.first{it.nombre == ciudadNombre.toString()}
