@@ -32,41 +32,5 @@ class ReaderTexto(private val text : String) : Reader{
 
 }
 
-object ReaderWeb : Reader{
-
-    private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
-    override suspend fun leerCiudades(): List<Ciudad> {
-        val url = "http://172.26.1.56:8080/api/v1/"
-
-        val retrofit = getRetrofit(url)
-
-        return CiudadesApi(retrofit).retrofitService.getCiudades()
-    }
-
-    private fun getRetrofit(url : String) : Retrofit{
-        return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(url)
-            .build()
-    }
 
 
-
-}
-
-interface MarsApiService {
-    /**
-     * Returns a [List] of [MarsPhoto] and this method can be called from a Coroutine.
-     * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
-     * HTTP method
-     */
-    @GET("ciudades/")
-    suspend fun getCiudades(): List<Ciudad>
-}
-
-class CiudadesApi(retrofit: Retrofit) {
-    val retrofitService: MarsApiService by lazy { retrofit.create(MarsApiService::class.java) }
-}

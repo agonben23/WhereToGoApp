@@ -83,9 +83,10 @@ fun Pair<Punto, Punto>.distancia() : Double {
 
 }
 
-fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Ciudad? {
+fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
 
     var ciudadMasProxima : Ciudad? = null
+    var distancia : Int = 0
 
     for (ciudad in lisCiudades){
 
@@ -97,12 +98,13 @@ fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Ciudad? {
 
             if (Pair(this,punto).distancia() < Pair(this,ciudadMasProxima.punto()).distancia()){
                 ciudadMasProxima = ciudad
+                distancia = Pair(this,punto).distancia().roundToInt()
             }
 
         }
 
     }
 
-    return ciudadMasProxima
+    return Pair(ciudadMasProxima,distancia)
 
 }

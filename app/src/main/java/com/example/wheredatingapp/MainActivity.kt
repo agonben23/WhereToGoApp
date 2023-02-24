@@ -50,14 +50,14 @@ class MainActivity : AppCompatActivity() {
 
             val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades as ArrayList<Ciudad>)
 
-            if (ciudadMasProxima != null){
-                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima)
+            if (ciudadMasProxima.first != null){
+                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima.first!!, ciudadMasProxima.second)
             }
 
         }
     }
 
-    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad){
+    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad, distancia : Int){
 
         if (lisCiudades.all { it != null }) {
 
@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("CiudadMasProxima",ciudadMasProxima.nombre)
             intent.putExtra("LatitudCiudadMasProxima",ciudadMasProxima.latitud)
             intent.putExtra("LongitudCiudadMasProxima",ciudadMasProxima.longitud)
+
+            intent.putExtra("DistanciaPMCM",distancia)
 
             startActivity(intent)
         }

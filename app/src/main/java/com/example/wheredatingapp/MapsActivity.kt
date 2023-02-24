@@ -80,10 +80,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val latitudCiudadMasProxima = bundle.get("LatitudCiudadMasProxima")
         val longitudCiudadMasProxima = bundle.get("LongitudCiudadMasProxima")
 
+        val distanciaPuntoMedioCiudadMasProxima = bundle.get("DistanciaPMCM") as Int
+
         if (ciudadMasProxima != null && latitudCiudadMasProxima != null && longitudCiudadMasProxima != null){
             val puntoCiudadMasProximaAlPuntoMedio = LatLng(latitudCiudadMasProxima as Double,longitudCiudadMasProxima as Double)
 
-            mMap.addMarker(MarkerOptions().position(puntoCiudadMasProximaAlPuntoMedio).title("Ciudad más proxima al punto medio : $ciudadMasProxima"))
+            mMap.addMarker(MarkerOptions().position(puntoCiudadMasProximaAlPuntoMedio).title("Ciudad más proxima : $ciudadMasProxima Distancia  : $distanciaPuntoMedioCiudadMasProxima km"))
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoMedio))
