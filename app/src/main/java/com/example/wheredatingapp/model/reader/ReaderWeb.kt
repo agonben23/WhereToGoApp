@@ -9,12 +9,13 @@ import retrofit2.http.GET
 
 object ReaderWeb : Reader{
 
+    private const val url = "http://192.168.171.236:8080/api/v1/"
+
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
 
     override suspend fun leerCiudades(): List<Ciudad> {
-        val url = "http://172.26.5.118:8080/api/v1/"
 
         val retrofit = getRetrofit(url)
 
@@ -34,8 +35,8 @@ object ReaderWeb : Reader{
 
 interface ApiService {
     /**
-     * Returns a [List] of [MarsPhoto] and this method can be called from a Coroutine.
-     * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
+     * Returns a [List] of [Ciudad] and this method can be called from a Coroutine.
+     * The @GET annotation indicates that the "ciudades" endpoint will be requested with the GET
      * HTTP method
      */
     @GET("ciudades/all")

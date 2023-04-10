@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WhereDatingApp</string>
+    <string name="app_name">WhereToGo</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="latitud">Latitud</string>
     <string name="longitud">Longitud</string>
