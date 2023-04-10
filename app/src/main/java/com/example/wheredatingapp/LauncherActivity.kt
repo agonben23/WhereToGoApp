@@ -14,7 +14,7 @@ class LauncherActivity : AppCompatActivity() {
 
         Handler().postDelayed(
             {
-                val intent = Intent(this@LauncherActivity,MainActivity::class.java)
+                val intent = Intent(this@LauncherActivity,LoginActivity::class.java)
                 startActivity(intent)
             },
             3000
