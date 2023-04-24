@@ -15,13 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class SearchMidpointCityActivity : AppCompatActivity() {
 
     private var lisCiudades: List<Ciudad> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search_midpoint_city)
 
         val scope = CoroutineScope(Job() + Dispatchers.Main)
 
