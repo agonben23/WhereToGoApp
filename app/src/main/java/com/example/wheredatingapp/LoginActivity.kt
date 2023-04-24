@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun launchMain(usuario: Usuario){
-        val intent = Intent(this, SearchMidpointCityActivity::class.java)
+        val intent = Intent(this, MenuActivity::class.java)
 
         intent.putExtra("nick",usuario.nick)
         intent.putExtra("mail",usuario.mail)
