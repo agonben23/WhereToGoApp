@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             textLat.text = ciudad.latitud.toString()
             textLong.text = ciudad.longitud.toString()
         }else{
-            Toast.makeText(this, "com.example.wheredatingapp.model.Ciudad no encontrada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Ciudad no encontrada", Toast.LENGTH_SHORT).show()
         }
 
     }

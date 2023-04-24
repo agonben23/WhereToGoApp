@@ -12,4 +12,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="login">Login</string>
+    <string name="usuario">Usuario</string>
+    <string name="Email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="cambiarContraseña">¿Has olvidado la contraseña?</string>
+    <string name="registro">Regístrate</string>
 </resources>
