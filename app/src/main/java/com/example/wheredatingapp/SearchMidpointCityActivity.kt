@@ -1,19 +1,33 @@
 package com.example.wheredatingapp
 
-import Ciudad
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.wheredatingapp.model.Ciudad
+import com.example.wheredatingapp.model.reader.ReaderWeb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class SearchMidpointCityActivity : AppCompatActivity() {
+
+    private var lisCiudades: List<Ciudad> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search_midpoint_city)
+
+        val scope = CoroutineScope(Job() + Dispatchers.Main)
+
+        scope.launch {
+            lisCiudades = ReaderWeb.leerCiudades()
+        }
 
         val buttonSearch1 : Button = findViewById(R.id.buttonSearch1)
         val buttonSearch2 : Button = findViewById(R.id.buttonSearch2)
@@ -30,10 +44,20 @@ class MainActivity : AppCompatActivity() {
             setPosition(R.id.editText2,R.id.lat2,R.id.lon2)
             ciudad2 = getCiudad(R.id.editText2)
         }
-        buttonCalculate.setOnClickListener { setMapLocatitions(listOf(ciudad1,ciudad2)) }
+        buttonCalculate.setOnClickListener {
+
+            val puntoMedio = calculatePosition()
+
+            val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades as ArrayList<Ciudad>)
+
+            if (ciudadMasProxima.first != null){
+                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima.first!!, ciudadMasProxima.second)
+            }
+
+        }
     }
 
-    private fun setMapLocatitions(lisCiudades : List<Ciudad?>){
+    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad, distancia : Int){
 
         if (lisCiudades.all { it != null }) {
 
@@ -53,6 +77,12 @@ class MainActivity : AppCompatActivity() {
                 contadorCiudades++
             }
 
+            intent.putExtra("CiudadMasProxima",ciudadMasProxima.nombre)
+            intent.putExtra("LatitudCiudadMasProxima",ciudadMasProxima.latitud)
+            intent.putExtra("LongitudCiudadMasProxima",ciudadMasProxima.longitud)
+
+            intent.putExtra("DistanciaPMCM",distancia)
+
             startActivity(intent)
         }
 
@@ -62,8 +92,6 @@ class MainActivity : AppCompatActivity() {
         val editText : EditText = findViewById(idEditText)
 
         val ciudadNombre = editText.text
-
-        val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
 
         return lisCiudades.find { it.nombre == ciudadNombre.toString() }
     }
@@ -75,8 +103,6 @@ class MainActivity : AppCompatActivity() {
         val editText : EditText = findViewById(idEditText)
 
         val ciudadNombre = editText.text
-
-        val lisCiudades = ReaderCiudades(this.resources.openRawResource(R.raw.ciudades).bufferedReader().readText()).leerCiudades()
 
         if (lisCiudades.any { it.nombre == ciudadNombre.toString() }){
             val ciudad = lisCiudades.first{it.nombre == ciudadNombre.toString()}

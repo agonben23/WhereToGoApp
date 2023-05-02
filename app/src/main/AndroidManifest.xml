@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhereDatingApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <!--
@@ -29,7 +30,7 @@
             android:value="${maps}" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,24 +43,19 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MapsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".LoginActivity"
+            android:exported="false">
         </activity>
         <activity
-            android:name=".MapsFragmentActivity"
-            android:exported="true"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchMidpointCityActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false">
         </activity>
     </application>
 

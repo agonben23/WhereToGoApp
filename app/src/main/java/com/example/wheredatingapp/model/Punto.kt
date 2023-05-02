@@ -1,5 +1,6 @@
 package com.example.wheredatingapp
 
+import com.example.wheredatingapp.model.Ciudad
 import kotlin.math.*
 
 data class Punto(val latitud : Double, val longitud: Double){
@@ -79,5 +80,31 @@ fun Pair<Punto, Punto>.distancia() : Double {
     val paso4 = acos(paso3 + paso1)
 
     return paso4 * 3963 * 1.609344
+
+}
+
+fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
+
+    var ciudadMasProxima : Ciudad? = null
+    var distancia : Int = 0
+
+    for (ciudad in lisCiudades){
+
+        val punto = ciudad.punto()
+
+        if (ciudadMasProxima == null){
+            ciudadMasProxima = ciudad
+        }else{
+
+            if (Pair(this,punto).distancia() < Pair(this,ciudadMasProxima.punto()).distancia()){
+                ciudadMasProxima = ciudad
+                distancia = Pair(this,punto).distancia().roundToInt()
+            }
+
+        }
+
+    }
+
+    return Pair(ciudadMasProxima,distancia)
 
 }
