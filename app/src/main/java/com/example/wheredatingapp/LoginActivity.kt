@@ -36,11 +36,16 @@ class LoginActivity : AppCompatActivity() {
         }
 
         register.setOnClickListener {
-            TODO("Crear Activity para el registro de usuarios")
+            registration()
         }
 
 
 
+    }
+
+    private fun registration() {
+        val intent = Intent(this,RegistrationActivity::class.java)
+        startActivity(intent)
     }
 
     private fun login(nick : String, password: String){

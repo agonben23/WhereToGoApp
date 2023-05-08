@@ -9,4 +9,8 @@ object AppToast{
         Toast.makeText(context, "En desarrollo", Toast.LENGTH_SHORT).show()
     }
 
+    fun registrationError(context: Context){
+        Toast.makeText(context, "Error en el registro del usuario", Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -15,7 +15,6 @@ object ReaderWeb : Reader{
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-
     override suspend fun leerCiudades(): List<Ciudad> {
 
         val retrofit = getRetrofit(url)
@@ -29,7 +28,7 @@ object ReaderWeb : Reader{
         return UsuariosApi(retrofit).retrofitService.getUser(userBusqueda)
     }
 
-    suspend fun insertUsuario(user: Usuario): String {
+    suspend fun insertUsuario(user: Usuario): Usuario? {
         val retrofit = getRetrofit(url)
 
         return UsuariosApi(retrofit).retrofitService.insertUser(user)
@@ -66,7 +65,7 @@ interface ApiServiceUsuarios {
     @GET("usuarios/all")
     suspend fun getUsers(): List<Usuario>
     @POST("usuarios/")
-    suspend fun insertUser(@Body user : Usuario) : String
+    suspend fun insertUser(@Body user : Usuario) : Usuario?
 
     @PUT("usuarios/one")
     suspend fun getUser(@Body userBusqueda: Usuario): Usuario?

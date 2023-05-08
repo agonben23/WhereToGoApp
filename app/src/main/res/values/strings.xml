@@ -22,4 +22,5 @@
     <string name="menu_opcion1">Busca un lugar para quedar</string>
     <string name="salir">Salir</string>
     <string name="ajustes">Ajustes</string>
+    <string name="registration">Registration</string>
 </resources>
