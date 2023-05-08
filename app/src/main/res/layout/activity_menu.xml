@@ -9,46 +9,127 @@
     tools:context=".MenuActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewMenuPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/menu_principal"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayoutMenuPrincipal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="0dp"
+        android:id="@+id/gridLayoutMenuPrincipal"
+        android:layout_width="175dp"
         android:layout_height="0dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="166dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="62dp"
         app:columnCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserConectado"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMenuPrincipal"
         app:rowCount="2">
 
-        <LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
 
             <ImageView
-                android:id="@+id/imageViewLauncher"
-                android:layout_width="wrap_content"
+                android:id="@+id/imageViewOpcion1"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                app:srcCompat="@drawable/punto_rojo"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
+
+            <TextView
+                android:id="@+id/textViewOpcion1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tierra"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/menu_opcion1"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
+
+            <ImageView
+                android:id="@+id/imageViewOpcion2"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                app:srcCompat="@drawable/tierra"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
+
+            <TextView
+                android:id="@+id/textViewOpcion2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_principal"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
+
+            <ImageView
+                android:id="@+id/imageViewOpcion3"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                app:srcCompat="@drawable/tierra"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
+
+            <TextView
+                android:id="@+id/textViewOpcion3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_principal"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
 
         </LinearLayout>
 
 
     </androidx.gridlayout.widget.GridLayout>
+
+    <TextView
+        android:id="@+id/textViewUserConectado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="134dp"
+        android:layout_marginBottom="16dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayoutMenuPrincipal" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

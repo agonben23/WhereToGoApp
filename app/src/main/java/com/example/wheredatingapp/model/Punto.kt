@@ -57,8 +57,6 @@ fun Pair<Punto, Punto>.distancia() : Double {
 
     val constante = Math.PI / 180
 
-    val longitud1 = this.first.longitud * constante
-    val longitud2 = this.second.longitud * constante
     val latitud1 = this.first.latitud * constante
     val latitud2 = this.second.latitud * constante
 

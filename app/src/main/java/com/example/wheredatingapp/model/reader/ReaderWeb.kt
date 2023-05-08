@@ -10,7 +10,7 @@ import retrofit2.http.GET
 
 object ReaderWeb : Reader{
 
-    private const val url = "http://192.168.182.236:8080/api/v1/"
+    private const val url = "http://192.168.86.236:8080/api/v1/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
