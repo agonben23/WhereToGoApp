@@ -6,7 +6,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
+import retrofit2.http.*
 
 object ReaderWeb : Reader{
 
@@ -23,13 +23,16 @@ object ReaderWeb : Reader{
         return CiudadesApi(retrofit).retrofitService.getCiudades()
     }
 
-    suspend fun buscarUsuario(userBusqueda: Usuario): Usuario?{
+    suspend fun buscarUsuario(userBusqueda: Usuario): Usuario? {
         val retrofit = getRetrofit(url)
 
-        val lisUsuarios = UsuariosApi(retrofit).retrofitService.getUsers()
+        return UsuariosApi(retrofit).retrofitService.getUser(userBusqueda)
+    }
 
+    suspend fun insertUsuario(user: Usuario): String {
+        val retrofit = getRetrofit(url)
 
-        return lisUsuarios.find { (it.mail == userBusqueda.mail || it.nick == userBusqueda.nick) && it.password == userBusqueda.password }
+        return UsuariosApi(retrofit).retrofitService.insertUser(user)
     }
 
     private fun getRetrofit(url : String) : Retrofit {
@@ -62,6 +65,11 @@ interface ApiServiceUsuarios {
 
     @GET("usuarios/all")
     suspend fun getUsers(): List<Usuario>
+    @POST("usuarios/")
+    suspend fun insertUser(@Body user : Usuario) : String
+
+    @PUT("usuarios/one")
+    suspend fun getUser(@Body userBusqueda: Usuario): Usuario?
 }
 
 class CiudadesApi(retrofit: Retrofit) {

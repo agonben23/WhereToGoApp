@@ -101,7 +101,7 @@
                 android:id="@+id/imageViewOpcion3"
                 android:layout_width="match_parent"
                 android:layout_height="141dp"
-                app:srcCompat="@drawable/tierra"
+                app:srcCompat="@drawable/ajustes"
                 tools:layout_editor_absoluteX="143dp"
                 tools:layout_editor_absoluteY="602dp" />
 
@@ -109,7 +109,35 @@
                 android:id="@+id/textViewOpcion3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/menu_principal"
+                android:text="@string/ajustes"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
+
+            <ImageView
+                android:id="@+id/imageViewOpcion4"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                app:srcCompat="@drawable/logout"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
+
+            <TextView
+                android:id="@+id/textViewOpcion4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/salir"
                 android:textAlignment="center"
                 android:textSize="25sp"
                 tools:layout_editor_absoluteX="86dp"

@@ -20,4 +20,6 @@
     <string name="cambiarContraseña">¿Has olvidado la contraseña?</string>
     <string name="registro">Regístrate</string>
     <string name="menu_opcion1">Busca un lugar para quedar</string>
+    <string name="salir">Salir</string>
+    <string name="ajustes">Ajustes</string>
 </resources>
