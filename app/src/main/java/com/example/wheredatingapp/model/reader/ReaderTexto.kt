@@ -18,9 +18,10 @@ class ReaderTexto(private val text : String) : Reader{
             lisCiudades.add(
                 Ciudad(
                     datos[0],
-                    datos[1].toInt(),
-                    datos[2].toDouble(),
-                    datos[3].toDouble()
+                    datos[1],
+                    datos[2].toInt(),
+                    datos[3].toDouble(),
+                    datos[4].toDouble()
                 )
             )
         }

@@ -63,7 +63,9 @@ class LoginActivity : AppCompatActivity() {
 
                 if (usuario != null) {
 
-                    launchMain(usuario!!)
+                    launchMain(
+                        usuario!!
+                    )
 
                 } else {
                     toastUserNotFound()
@@ -79,12 +81,15 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "Datos incorrecto(s)", Toast.LENGTH_SHORT).show()
     }
 
-    private fun launchMain(usuario: Usuario){
+    private fun launchMain(
+        usuario: Usuario
+    ){
         val intent = Intent(this, MenuActivity::class.java)
 
         intent.putExtra("nick",usuario.nick)
         intent.putExtra("mail",usuario.mail)
         intent.putExtra("password",usuario.password)
+
 
         startActivity(intent)
 
