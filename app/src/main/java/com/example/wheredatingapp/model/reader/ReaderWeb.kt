@@ -70,7 +70,7 @@ interface ApiServiceUsuarios {
     @POST("usuarios/")
     suspend fun insertUser(@Body user : Usuario) : Usuario?
 
-    @PUT("usuarios/one")
+    @POST("usuarios/one")
     suspend fun getUser(@Body userBusqueda: Usuario): Usuario?
 }
 

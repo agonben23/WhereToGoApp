@@ -25,7 +25,7 @@ class MenuActivity : AppCompatActivity() {
 
         opcion2.setOnClickListener { AppToast.inDevelloping(this) }
         opcion3.setOnClickListener { AppToast.inDevelloping(this) }
-        opcion4.setOnClickListener { AppToast.inDevelloping(this) }
+        opcion4.setOnClickListener { abrirVentana(R.string.salir) }
     }
 
     private fun setUserConectado(nick : String){
@@ -42,6 +42,10 @@ class MenuActivity : AppCompatActivity() {
                 val intent: Intent = Intent(this,SearchMidpointCityActivity::class.java)
                 startActivity(intent)
 
+            }
+            R.string.salir ->{
+                val intent = Intent(this,LoginActivity::class.java)
+                startActivity(intent)
             }
         }
 

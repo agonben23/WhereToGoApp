@@ -8,30 +8,26 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <TextView
-        android:id="@+id/textViewMenuPrincipal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/menu_principal"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayoutMenuPrincipal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </ScrollView>
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayoutMenuPrincipal"
-        android:layout_width="175dp"
+        android:layout_width="224dp"
         android:layout_height="0dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginBottom="62dp"
-        app:columnCount="2"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="128dp"
+        app:columnCount="1"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserConectado"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMenuPrincipal"
-        app:rowCount="2">
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="4">
 
         <LinearLayout
             android:id="@+id/linearLayoutOpcion1"
@@ -44,7 +40,7 @@
             <ImageView
                 android:id="@+id/imageViewOpcion1"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="90dp"
                 app:srcCompat="@drawable/punto_rojo"
                 tools:layout_editor_absoluteX="143dp"
                 tools:layout_editor_absoluteY="602dp" />
@@ -55,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/menu_opcion1"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="86dp"
                 tools:layout_editor_absoluteY="63dp" />
 
@@ -72,7 +68,7 @@
             <ImageView
                 android:id="@+id/imageViewOpcion2"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="90dp"
                 app:srcCompat="@drawable/tierra"
                 tools:layout_editor_absoluteX="143dp"
                 tools:layout_editor_absoluteY="602dp" />
@@ -83,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/menu_principal"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="86dp"
                 tools:layout_editor_absoluteY="63dp" />
 
@@ -100,9 +96,9 @@
             <ImageView
                 android:id="@+id/imageViewOpcion3"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ajustes"
-                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteX="90dp"
                 tools:layout_editor_absoluteY="602dp" />
 
             <TextView
@@ -111,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ajustes"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="86dp"
                 tools:layout_editor_absoluteY="63dp" />
 
@@ -128,7 +124,7 @@
             <ImageView
                 android:id="@+id/imageViewOpcion4"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="90dp"
                 app:srcCompat="@drawable/logout"
                 tools:layout_editor_absoluteX="143dp"
                 tools:layout_editor_absoluteY="602dp" />
@@ -139,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/salir"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="86dp"
                 tools:layout_editor_absoluteY="63dp" />
 
