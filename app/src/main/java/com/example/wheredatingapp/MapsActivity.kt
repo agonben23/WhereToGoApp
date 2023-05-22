@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.wheredatingapp.databinding.ActivityMapsBinding
 import com.example.wheredatingapp.ui.Icons
+import com.example.wheredatingapp.ui.getMarkerIcon
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -51,7 +52,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val longitud = bundle.get("longitudResultado") as Double
 
         val puntoMedio = LatLng(latitud, longitud)
-        mMap.addMarker(MarkerOptions().position(puntoMedio).title("Punto Medio"))
+        mMap.addMarker(MarkerOptions().position(puntoMedio).title("Punto Medio").icon(
+            getMarkerIcon("#51f407")
+        ))
 
         var ciudadEncontrada = true
         var contador = 1
@@ -85,8 +88,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ciudadMasProxima != null && latitudCiudadMasProxima != null && longitudCiudadMasProxima != null){
             val puntoCiudadMasProximaAlPuntoMedio = LatLng(latitudCiudadMasProxima as Double,longitudCiudadMasProxima as Double)
 
-            mMap.addMarker(MarkerOptions().position(puntoCiudadMasProximaAlPuntoMedio).title("Ciudad más proxima : $ciudadMasProxima Distancia  : $distanciaPuntoMedioCiudadMasProxima km"))
+            mMap.addMarker(MarkerOptions().position(puntoCiudadMasProximaAlPuntoMedio).title("Ciudad más proxima : $ciudadMasProxima Distancia  : $distanciaPuntoMedioCiudadMasProxima km").icon(
+                getMarkerIcon("#ff2299")
+            ))
         }
+
+        /*
+
+        val ciudadMejorCoeficiente = bundle.get("CiudadMejorCoeficiente")
+        val latitudCiudadMejorCoeficiente = bundle.get("LatitudCiudadMejorCoeficiente")
+        val longitudCiudadMejorCoeficiente = bundle.get("LongitudCiudadMejorCoeficiente")
+
+        if (ciudadMejorCoeficiente != null && latitudCiudadMejorCoeficiente != null && longitudCiudadMejorCoeficiente != null){
+            val puntoCiudadMejorCoeficiente = LatLng(latitudCiudadMejorCoeficiente as Double,longitudCiudadMejorCoeficiente as Double)
+
+            mMap.addMarker(MarkerOptions().position(puntoCiudadMejorCoeficiente).title("Ciudad mejor coeficiente : $ciudadMejorCoeficiente").icon(
+                getMarkerIcon("#ff2299")
+            ))
+        }
+
+         */
+
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(puntoMedio))
 

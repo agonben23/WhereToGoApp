@@ -49,15 +49,16 @@ class SearchMidpointCityActivity : AppCompatActivity() {
             val puntoMedio = calculatePosition()
 
             val ciudadMasProxima = puntoMedio.ciudadMasProxima(lisCiudades as ArrayList<Ciudad>)
+            val ciudadMejorCoeficiente = puntoMedio.ciudadMejorCoeficiente(lisCiudades as ArrayList<Ciudad>)
 
             if (ciudadMasProxima.first != null){
-                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima.first!!, ciudadMasProxima.second)
+                setMapLocatitions(listOf(ciudad1,ciudad2),ciudadMasProxima.first!!,ciudadMasProxima.second,ciudadMejorCoeficiente)
             }
 
         }
     }
 
-    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad, distancia : Int){
+    private fun setMapLocatitions(lisCiudades : List<Ciudad?>, ciudadMasProxima : Ciudad ,distancia : Int , ciudadMejorCoeficiente : Ciudad){
 
         if (lisCiudades.all { it != null }) {
 
@@ -82,6 +83,10 @@ class SearchMidpointCityActivity : AppCompatActivity() {
             intent.putExtra("LongitudCiudadMasProxima",ciudadMasProxima.longitud)
 
             intent.putExtra("DistanciaPMCM",distancia)
+
+            intent.putExtra("CiudadMejorCoeficiente",ciudadMejorCoeficiente.nombre)
+            intent.putExtra("LatitudCiudadMejorCoeficiente",ciudadMejorCoeficiente.latitud)
+            intent.putExtra("LongitudCiudadMejorCoeficiente",ciudadMejorCoeficiente.longitud)
 
             startActivity(intent)
         }

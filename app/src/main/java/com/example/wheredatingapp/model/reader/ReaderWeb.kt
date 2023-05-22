@@ -2,6 +2,9 @@ package com.example.wheredatingapp.model.reader
 
 import com.example.wheredatingapp.model.Ciudad
 import com.example.wheredatingapp.model.Usuario
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonEncodingException
+import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -10,10 +13,10 @@ import retrofit2.http.*
 
 object ReaderWeb : Reader{
 
-    private val ipMovil = "192.168.54.174"
-    private val ipServer = "192.168.0.23"
+    private val ipMovil = "192.168.153.236"
+    private val ipServer = "172.26.5.118"
 
-    private val url = "http://$ipServer:8080/api/v1/"
+    private val url = "http://$ipMovil:8080/api/v1/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

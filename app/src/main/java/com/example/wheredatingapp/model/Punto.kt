@@ -81,6 +81,15 @@ fun Pair<Punto, Punto>.distancia() : Double {
 
 }
 
+fun Pair<Punto,Ciudad>.coeficiente() : Double{
+
+    val distancia = Pair(this.first,this.second.punto()).distancia()
+
+    val tier = this.second.tier
+
+    return distancia * tier
+}
+
 fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
 
     var ciudadMasProxima : Ciudad? = null
@@ -104,5 +113,27 @@ fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
     }
 
     return Pair(ciudadMasProxima,distancia)
+
+}
+
+fun Punto.ciudadMejorCoeficiente(lisCiudades: ArrayList<Ciudad>) : Ciudad {
+
+    var ciudadMejorCoeficiente : Ciudad? = null
+
+    for (ciudad in lisCiudades){
+
+        if (ciudadMejorCoeficiente == null){
+            ciudadMejorCoeficiente = ciudad
+        }else{
+
+            if (Pair(this,ciudad).coeficiente() < Pair(this,ciudadMejorCoeficiente).coeficiente()){
+                ciudadMejorCoeficiente = ciudad
+            }
+
+        }
+
+    }
+
+    return ciudadMejorCoeficiente!!
 
 }

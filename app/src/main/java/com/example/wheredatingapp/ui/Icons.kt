@@ -1,9 +1,10 @@
 package com.example.wheredatingapp.ui
 
 import android.content.Context
-import androidx.core.content.ContextCompat
-import com.example.wheredatingapp.R
+import android.graphics.Color
 import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+
 
 class Icons(context: Context) {
 
@@ -15,4 +16,10 @@ class Icons(context: Context) {
 
      */
 
+}
+
+fun getMarkerIcon(color: String?): BitmapDescriptor? {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(Color.parseColor(color), hsv)
+    return BitmapDescriptorFactory.defaultMarker(hsv[0])
 }
