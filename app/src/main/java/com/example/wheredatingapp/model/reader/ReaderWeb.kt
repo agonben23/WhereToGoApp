@@ -1,6 +1,7 @@
 package com.example.wheredatingapp.model.reader
 
 import com.example.wheredatingapp.model.Ciudad
+import com.example.wheredatingapp.model.Lugar
 import com.example.wheredatingapp.model.Usuario
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonEncodingException
@@ -40,6 +41,12 @@ object ReaderWeb : Reader{
         return UsuariosApi(retrofit).retrofitService.insertUser(user)
     }
 
+    suspend fun leerLugaresbyCiudad(ciudad: String): List<Lugar>?{
+        val retrofit = getRetrofit(url)
+
+        return LugaresApi(retrofit).retrofitService.getLugaresbyCity(ciudad)
+    }
+
     private fun getRetrofit(url : String) : Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -77,10 +84,21 @@ interface ApiServiceUsuarios {
     suspend fun getUser(@Body userBusqueda: Usuario): Usuario?
 }
 
+interface ApiServiceLugares {
+
+    @POST("lugares/bycity")
+    suspend fun getLugaresbyCity(@Body ciudad : String) : List<Lugar>?
+
+}
+
 class CiudadesApi(retrofit: Retrofit) {
     val retrofitService: ApiServiceCiudades by lazy { retrofit.create(ApiServiceCiudades::class.java) }
 }
 
 class UsuariosApi(retrofit: Retrofit) {
     val retrofitService: ApiServiceUsuarios by lazy { retrofit.create(ApiServiceUsuarios::class.java) }
+}
+
+class LugaresApi(retrofit: Retrofit){
+    val retrofitService: ApiServiceLugares by lazy { retrofit.create(ApiServiceLugares::class.java) }
 }
