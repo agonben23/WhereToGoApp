@@ -1,9 +1,13 @@
 package com.example.wheredatingapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,8 +29,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
+import com.example.wheredatingapp.model.Ciudad
 import com.example.wheredatingapp.model.Lugar
 import com.example.wheredatingapp.model.reader.ReaderWeb
 import com.example.wheredatingapp.ui.theme.WhereDatingAppTheme
@@ -42,7 +51,7 @@ class PlacesActivity : ComponentActivity() {
 
             WhereDatingAppTheme {
 
-                PantallaLugares()
+                PantallaLugares(this)
 
             }
         }
@@ -52,16 +61,22 @@ class PlacesActivity : ComponentActivity() {
 }
 
 
-    private suspend fun cargarLugares(ciudad: String) : List<Lugar>{
+    private suspend fun cargarLugares(context: Context, ciudad: String) : List<Lugar>{
 
         var listaLugares = listOf<Lugar>()
 
         val newList = ReaderWeb.leerLugaresbyCiudad(ciudad)
 
         if (newList != null){
-                listaLugares = newList
-        }
 
+            if (newList.isNotEmpty()) {
+
+                listaLugares = newList
+
+            }else{
+                AppToast.lugaresNotFound(context)
+            }
+        }
 
         return listaLugares
 
@@ -70,7 +85,7 @@ class PlacesActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PantallaLugares(){
+fun PantallaLugares(context: Context){
 
     val scope = rememberCoroutineScope()
 
@@ -88,10 +103,14 @@ fun PantallaLugares(){
             }
 
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 30.dp)) {
+
                 Column(Modifier.weight(0.5f)) {
                     Text(text = "Buscar por ciudad")
                 }
-                Column(Modifier.weight(0.5f).padding(end = 10.dp)) {
+                Column(
+                    Modifier
+                        .weight(0.5f)
+                        .padding(end = 10.dp)) {
                     TextField(value = ciudad, onValueChange = { newCiudad ->
                         ciudad = newCiudad
                     }
@@ -103,7 +122,7 @@ fun PantallaLugares(){
                     Button(onClick =
                     {
                         scope.launch {
-                            listaLugares = cargarLugares(ciudad)
+                            listaLugares = cargarLugares(context, ciudad)
                         }
 
 
@@ -120,26 +139,62 @@ fun PantallaLugares(){
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PantallaLugaresPreview() {
-    WhereDatingAppTheme {
-        PantallaLugares()
-      }
-    }
-
 @Composable
 fun PlacesList(listaLugares : List<Lugar>){
 
     LazyColumn{
 
         items(listaLugares){
+
+            RowSeparator(25)
+            
             Row() {
-                Text(text = it.nombre)
-                Text(text = it.descripcion)
+
+                BoxPlace(lugar = it)
             }
         }
 
     }
 
+}
+
+@Composable
+fun BoxPlace(lugar: Lugar){
+
+    Box(modifier = Modifier
+        .padding(horizontal = 10.dp)
+        .border(1.dp, color = Color.Black)) {
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(all = 20.dp)) {
+
+            Row() {
+                Text(text = lugar.nombre, fontWeight = FontWeight.Bold)
+            }
+
+            RowSeparator(separator = 5)
+
+            Row {
+
+                Column() {
+
+                    AsyncImage(
+                        model = lugar.uriImagen,
+                        contentDescription = null,
+                        modifier = Modifier.size(200.dp)
+                    )
+
+                }
+
+                ColumnSeparator(separator = 5)
+
+                Column() {
+                    Text(text = lugar.descripcion)
+                }
+
+
+            }
+
+        }
+
+    }
 }

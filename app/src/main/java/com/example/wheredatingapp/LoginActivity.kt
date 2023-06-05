@@ -56,15 +56,13 @@ class LoginActivity : AppCompatActivity() {
 
             val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-            var usuario: Usuario?
-
             scope.launch {
-                usuario = ReaderWeb.buscarUsuario(userBusqueda)
+                val usuario = ReaderWeb.buscarUsuario(userBusqueda)
 
                 if (usuario != null) {
 
                     launchMain(
-                        usuario!!
+                        usuario
                     )
 
                 } else {

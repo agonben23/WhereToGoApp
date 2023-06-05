@@ -13,4 +13,8 @@ object AppToast{
         Toast.makeText(context, "Error en el registro del usuario", Toast.LENGTH_SHORT).show()
     }
 
+    fun lugaresNotFound(context: Context){
+        Toast.makeText(context, "No se ha encontrado ningún lugar para visitar en esa localidad", Toast.LENGTH_SHORT).show()
+    }
+
 }

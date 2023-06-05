@@ -23,7 +23,9 @@ class MenuActivity : AppCompatActivity() {
             abrirVentana(R.string.menu_opcion1)
         }
 
-        opcion2.setOnClickListener { AppToast.inDevelloping(this) }
+        opcion2.setOnClickListener {
+            abrirVentana(R.string.menu_opcion2)
+        }
         opcion3.setOnClickListener { AppToast.inDevelloping(this) }
         opcion4.setOnClickListener { abrirVentana(R.string.salir) }
     }
@@ -43,6 +45,14 @@ class MenuActivity : AppCompatActivity() {
                 startActivity(intent)
 
             }
+
+            R.string.menu_opcion2 -> {
+
+                val intent : Intent = Intent(this,PlacesActivity::class.java)
+                startActivity(intent)
+
+            }
+
             R.string.salir ->{
                 val intent = Intent(this,LoginActivity::class.java)
                 startActivity(intent)
