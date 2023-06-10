@@ -10,7 +10,7 @@ object AppToast{
     }
 
     fun registrationError(context: Context){
-        Toast.makeText(context, "Error en el registro del usuario", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error en el registro del usuario (ya existe un usuario con ese nick o correo electrónico)", Toast.LENGTH_SHORT).show()
     }
 
     fun lugaresNotFound(context: Context){

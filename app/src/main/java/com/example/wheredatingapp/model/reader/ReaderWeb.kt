@@ -15,9 +15,9 @@ import retrofit2.http.*
 object ReaderWeb : Reader{
 
     private val ipMovil = "192.168.138.236"
-    private val ipServer = "172.26.5.118"
+    private val ipServer = "192.168.0.23"
 
-    private val url = "http://$ipMovil:8080/api/v1/"
+    private val url = "http://$ipServer:8080/api/v1/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

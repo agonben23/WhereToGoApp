@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.io.EOFException
 
 class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +41,19 @@ class RegistrationActivity : AppCompatActivity() {
             val context = this
 
             scope.launch {
-                val usuario = ReaderWeb.insertUsuario(userBusqueda)
 
-                if(usuario != null){
-                    Toast.makeText(context,"Usuario registrado correctamente",Toast.LENGTH_LONG).show()
-                }else{
+                try {
+
+
+                    val usuario = ReaderWeb.insertUsuario(userBusqueda)
+
+                        Toast.makeText(
+                            context,
+                            "Usuario registrado correctamente",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                }catch (e : EOFException){
                     AppToast.registrationError(context)
                 }
 

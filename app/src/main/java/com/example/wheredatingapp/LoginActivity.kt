@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.io.EOFException
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,15 +58,21 @@ class LoginActivity : AppCompatActivity() {
             val scope = CoroutineScope(Job() + Dispatchers.Main)
 
             scope.launch {
-                val usuario = ReaderWeb.buscarUsuario(userBusqueda)
 
-                if (usuario != null) {
+                try {
 
-                    launchMain(
-                        usuario
-                    )
+                    val usuario = ReaderWeb.buscarUsuario(userBusqueda)
 
-                } else {
+                    if (usuario != null) {
+
+                        launchMain(
+                            usuario
+                        )
+
+                    } else {
+                        toastUserNotFound()
+                    }
+                }catch (e : EOFException){
                     toastUserNotFound()
                 }
             }
