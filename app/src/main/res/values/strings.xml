@@ -23,6 +23,6 @@
     <string name="menu_opcion2">Buscar lugares para ver</string>
     <string name="salir">Salir</string>
     <string name="ajustes">Ajustes</string>
-    <string name="registration">Registration</string>
+    <string name="registration">Registro</string>
     <string name="title_activity_places">PlacesActivity</string>
 </resources>
