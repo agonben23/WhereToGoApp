@@ -1,5 +1,7 @@
 package com.example.wheredatingapp.model.reader
 
+import android.content.Context
+import com.example.wheredatingapp.config.Configuration
 import com.example.wheredatingapp.model.Ciudad
 import com.example.wheredatingapp.model.Lugar
 import com.example.wheredatingapp.model.Usuario
@@ -12,10 +14,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-object ReaderWeb : Reader{
+class ReaderWeb(context: Context) : Reader{
 
-    private val ipMovil = "192.168.138.236"
-    private val ipServer = "192.168.0.23"
+    private val ipServer = Configuration.ipServer(context)
 
     private val url = "http://$ipServer:8080/api/v1/"
 

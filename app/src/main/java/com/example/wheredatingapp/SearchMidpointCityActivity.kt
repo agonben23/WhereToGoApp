@@ -25,8 +25,10 @@ class SearchMidpointCityActivity : AppCompatActivity() {
 
         val scope = CoroutineScope(Job() + Dispatchers.Main)
 
+        val readerWeb = ReaderWeb(this)
+
         scope.launch {
-            lisCiudades = ReaderWeb.leerCiudades()
+            lisCiudades = readerWeb.leerCiudades()
         }
 
         val buttonSearch1 : Button = findViewById(R.id.buttonSearch1)

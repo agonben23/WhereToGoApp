@@ -1,5 +1,6 @@
 package com.example.wheredatingapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val context = this
+
         val usuario : EditText = findViewById(R.id.editTextUsuario)
         val password : EditText = findViewById(R.id.editTextPassword)
 
@@ -29,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val register : TextView = findViewById(R.id.textViewRegister)
 
         buttonLogin.setOnClickListener {
-            login(usuario.text.toString(), password.text.toString())
+            login(context,usuario.text.toString(), password.text.toString())
         }
 
         changePassword.setOnClickListener {
@@ -49,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun login(nick : String, password: String){
+    private fun login(context: Context, nick : String, password: String){
 
         if (nick.isNotBlank() && password.isNotBlank()) {
 
@@ -61,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
                 try {
 
-                    val usuario = ReaderWeb.buscarUsuario(userBusqueda)
+                    val usuario = ReaderWeb(context).buscarUsuario(userBusqueda)
 
                     if (usuario != null) {
 

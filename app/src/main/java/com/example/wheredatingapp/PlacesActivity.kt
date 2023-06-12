@@ -65,7 +65,7 @@ class PlacesActivity : ComponentActivity() {
 
         var listaLugares = listOf<Lugar>()
 
-        val newList = ReaderWeb.leerLugaresbyCiudad(ciudad)
+        val newList = ReaderWeb(context).leerLugaresbyCiudad(ciudad)
 
         if (newList != null){
 

@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 import java.io.EOFException
 
 class RegistrationActivity : AppCompatActivity() {
+
+    private val context = this
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
@@ -35,33 +38,63 @@ class RegistrationActivity : AppCompatActivity() {
 
         if (email.isNotBlank() && nick.isNotBlank() && password.isNotBlank()) {
 
-            val userBusqueda = Usuario(mail = email, nick = nick, password = password)
+            if(datosValidos(email,nick,password)){
 
-            val scope = CoroutineScope(Job() + Dispatchers.Main)
-            val context = this
+              val userBusqueda = Usuario(mail = email, nick = nick, password = password)
 
-            scope.launch {
+              val scope = CoroutineScope(Job() + Dispatchers.Main)
+              val context = this
+
+              scope.launch {
 
                 try {
 
+                    ReaderWeb(context).insertUsuario(userBusqueda)
 
-                    val usuario = ReaderWeb.insertUsuario(userBusqueda)
+                    Toast.makeText(
+                        context,
+                        "Usuario registrado correctamente",
+                        Toast.LENGTH_LONG
+                    ).show()
 
-                        Toast.makeText(
-                            context,
-                            "Usuario registrado correctamente",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                }catch (e : EOFException){
+                } catch (e: EOFException) {
                     AppToast.registrationError(context)
                 }
-
+              }
 
             }
         }else{
             AppToast.registrationError(this)
         }
+    }
+
+    private fun datosValidos(email: String,nick: String,password: String) : Boolean{
+
+        if(password.length < 5){
+
+            Toast.makeText(context,"Contraseña no válida",Toast.LENGTH_SHORT).show()
+
+            return false
+        }else if(nick.contains("{}^[]()#")){
+
+            Toast.makeText(context,"Nick de usuario no válido",Toast.LENGTH_SHORT).show()
+
+            return false
+        }else if(!emailValido(email)){
+
+            Toast.makeText(context,"email no válido",Toast.LENGTH_SHORT).show()
+
+            return false
+        }else{
+            return true
+        }
+
+    }
+
+    private fun emailValido(email: String) : Boolean{
+        val regexEmail = Regex("^[A-Za-z](.*)(@)(.{1,})(\\.)(.{1,})")
+
+        return email.matches(regexEmail)
     }
 
 

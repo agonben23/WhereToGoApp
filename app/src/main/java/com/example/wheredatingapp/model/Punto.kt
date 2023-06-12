@@ -87,7 +87,7 @@ fun Pair<Punto,Ciudad>.coeficiente() : Double{
 
     val tier = this.second.tier
 
-    return distancia * tier
+    return distancia * tier.toDouble().pow(2)
 }
 
 fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {

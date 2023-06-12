@@ -93,7 +93,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             ))
         }
 
-        /*
+
 
         val ciudadMejorCoeficiente = bundle.get("CiudadMejorCoeficiente")
         val latitudCiudadMejorCoeficiente = bundle.get("LatitudCiudadMejorCoeficiente")
@@ -107,7 +107,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             ))
         }
 
-         */
+
 
 
 
