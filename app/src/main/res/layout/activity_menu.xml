@@ -7,157 +7,145 @@
     tools:context=".MenuActivity">
 
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="wrap_content"
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayoutMenuPrincipal"
+        android:layout_width="227dp"
         android:layout_height="0dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="67dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="10dp"
+        app:columnCount="1"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserConectado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="4">
 
-        <androidx.gridlayout.widget.GridLayout
-            android:id="@+id/gridLayoutMenuPrincipal"
-            android:layout_width="224dp"
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            android:layout_marginBottom="128dp"
-            app:columnCount="1"
-            app:layout_constraintBottom_toTopOf="@+id/textViewUserConectado"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:rowCount="4">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
 
-            <LinearLayout
-                android:id="@+id/linearLayoutOpcion1"
+            <ImageView
+                android:id="@+id/imageViewOpcion1"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/punto_rojo"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
+
+            <TextView
+                android:id="@+id/textViewOpcion1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="614dp">
+                android:text="@string/menu_opcion1"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
 
-                <ImageView
-                    android:id="@+id/imageViewOpcion1"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    app:srcCompat="@drawable/punto_rojo"
-                    tools:layout_editor_absoluteX="143dp"
-                    tools:layout_editor_absoluteY="602dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textViewOpcion1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/menu_opcion1"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    tools:layout_editor_absoluteX="86dp"
-                    tools:layout_editor_absoluteY="63dp" />
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
 
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageViewOpcion2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/tierra"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutOpcion2"
+            <TextView
+                android:id="@+id/textViewOpcion2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="614dp">
+                android:text="@string/menu_opcion2"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
 
-                <ImageView
-                    android:id="@+id/imageViewOpcion2"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    app:srcCompat="@drawable/tierra"
-                    tools:layout_editor_absoluteX="143dp"
-                    tools:layout_editor_absoluteY="602dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textViewOpcion2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/menu_opcion2"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    tools:layout_editor_absoluteX="86dp"
-                    tools:layout_editor_absoluteY="63dp" />
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
 
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageViewOpcion3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ajustes"
+                tools:layout_editor_absoluteX="90dp"
+                tools:layout_editor_absoluteY="602dp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutOpcion3"
+            <TextView
+                android:id="@+id/textViewOpcion3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="614dp">
+                android:text="@string/ajustes"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
 
-                <ImageView
-                    android:id="@+id/imageViewOpcion3"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    app:srcCompat="@drawable/ajustes"
-                    tools:layout_editor_absoluteX="90dp"
-                    tools:layout_editor_absoluteY="602dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textViewOpcion3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ajustes"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    tools:layout_editor_absoluteX="86dp"
-                    tools:layout_editor_absoluteY="63dp" />
+        <LinearLayout
+            android:id="@+id/linearLayoutOpcion4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="614dp">
 
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageViewOpcion4"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:srcCompat="@drawable/logout"
+                tools:layout_editor_absoluteX="143dp"
+                tools:layout_editor_absoluteY="602dp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutOpcion4"
+            <TextView
+                android:id="@+id/textViewOpcion4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="614dp">
+                android:text="@string/salir"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="63dp" />
 
-                <ImageView
-                    android:id="@+id/imageViewOpcion4"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    app:srcCompat="@drawable/logout"
-                    tools:layout_editor_absoluteX="143dp"
-                    tools:layout_editor_absoluteY="602dp" />
-
-                <TextView
-                    android:id="@+id/textViewOpcion4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/salir"
-                    android:textAlignment="center"
-                    android:textSize="22sp"
-                    tools:layout_editor_absoluteX="86dp"
-                    tools:layout_editor_absoluteY="63dp" />
-
-            </LinearLayout>
+        </LinearLayout>
 
 
-        </androidx.gridlayout.widget.GridLayout>
+    </androidx.gridlayout.widget.GridLayout>
 
-    </ScrollView>
 
     <TextView
         android:id="@+id/textViewUserConectado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="36dp"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayoutMenuPrincipal"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayoutMenuPrincipal" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

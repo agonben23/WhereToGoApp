@@ -102,7 +102,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ciudadMejorCoeficiente != null && latitudCiudadMejorCoeficiente != null && longitudCiudadMejorCoeficiente != null){
             val puntoCiudadMejorCoeficiente = LatLng(latitudCiudadMejorCoeficiente as Double,longitudCiudadMejorCoeficiente as Double)
 
-            mMap.addMarker(MarkerOptions().position(puntoCiudadMejorCoeficiente).title("Ciudad mejor coeficiente : $ciudadMejorCoeficiente").icon(
+            mMap.addMarker(MarkerOptions().position(puntoCiudadMejorCoeficiente).title("Ciudad mejor situada : $ciudadMejorCoeficiente").icon(
                 getMarkerIcon("#ff2299")
             ))
         }
