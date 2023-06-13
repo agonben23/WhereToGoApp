@@ -106,43 +106,56 @@ fun PantallaLugares(context: Context){
                 mutableStateOf("")
             }
 
-            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 30.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 30.dp)
+            ) {
 
 
-                    Text(text = "Buscar por ciudad ", modifier = Modifier.padding(start = 15.dp))
+                Text(text = "Buscar por ciudad ", modifier = Modifier.padding(start = 15.dp))
+            }
 
-                    TextField(value = ciudad, onValueChange = { newCiudad ->
+            RowSeparator(separator = 5)
+
+            Row() {
+
+
+                TextField(
+                    value = ciudad, onValueChange = { newCiudad ->
                         ciudad = newCiudad
-                    }, modifier = Modifier.padding(horizontal = 15.dp)
-                    )
+                    },
+                    modifier = Modifier.padding(horizontal = 15.dp)
+                )
 
 
             }
+
+
 
             RowSeparator(separator = 15)
 
             Row() {
-                    Button(onClick = {
+                Button(onClick = {
 
-                        try {
-                            scope.launch {
-                                listaLugares = cargarLugares(context, ciudad)
-                            }
-                        }catch (e : SocketTimeoutException){
-                            AppToast.noInternetConnection(context)
-                        }catch (e : ConnectException){
-                            AppToast.noInternetConnection(context)
+                    try {
+                        scope.launch {
+                            listaLugares = cargarLugares(context, ciudad)
                         }
-                    }) {
-                        Text(text = "Buscar")
+                    } catch (e: SocketTimeoutException) {
+                        AppToast.noInternetConnection(context)
+                    } catch (e: ConnectException) {
+                        AppToast.noInternetConnection(context)
                     }
+                }) {
+                    Text(text = "Buscar")
                 }
-
             }
 
 
-            PlacesList(listaLugares = listaLugares)
 
+
+            PlacesList(listaLugares = listaLugares)
+         }
         }
     }
 
@@ -184,24 +197,24 @@ fun BoxPlace(lugar: Lugar){
 
             Row {
 
-                Column() {
-
-                    AsyncImage(
+                AsyncImage(
                         model = lugar.uriImagen,
                         contentDescription = null,
                         modifier = Modifier.size(200.dp)
-                    )
-
-                }
-
-                ColumnSeparator(separator = 5)
-
-                Column() {
-                    Text(text = lugar.descripcion)
-                }
+                )
 
 
             }
+
+            RowSeparator(separator = 5)
+
+            Row() {
+
+                Text(text = lugar.descripcion)
+
+            }
+
+
 
         }
 
