@@ -5,16 +5,15 @@ import com.example.wheredatingapp.config.Configuration
 import com.example.wheredatingapp.model.Ciudad
 import com.example.wheredatingapp.model.Lugar
 import com.example.wheredatingapp.model.Usuario
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonEncodingException
-import com.squareup.moshi.JsonReader
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
-class ReaderWeb(context: Context) : Reader{
+class ReaderWeb(context: Context) {
 
     private val ipServer = Configuration.ipServer(context)
 
@@ -23,7 +22,7 @@ class ReaderWeb(context: Context) : Reader{
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-    override suspend fun leerCiudades(): List<Ciudad> {
+    suspend fun leerCiudades(): List<Ciudad> {
 
         val retrofit = getRetrofit(url)
 
@@ -49,9 +48,15 @@ class ReaderWeb(context: Context) : Reader{
     }
 
     private fun getRetrofit(url : String) : Retrofit {
+
+        val client = OkHttpClient.Builder()
+            .callTimeout(0,TimeUnit.SECONDS)
+            .build()
+
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(url)
+            .client(client)
             .build()
     }
 

@@ -13,6 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.EOFException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -59,6 +61,10 @@ class RegistrationActivity : AppCompatActivity() {
 
                 } catch (e: EOFException) {
                     AppToast.registrationError(context)
+                } catch (e : SocketTimeoutException){
+                    AppToast.noInternetConnection(context)
+                }catch (e: ConnectException){
+                    AppToast.noInternetConnection(context)
                 }
               }
 
@@ -75,7 +81,8 @@ class RegistrationActivity : AppCompatActivity() {
             Toast.makeText(context,"Contraseña no válida",Toast.LENGTH_SHORT).show()
 
             return false
-        }else if(nick.contains("{}^[]()#")){
+
+        }else if(nick.contains("{}^[]()#") || nick.length < 5){
 
             Toast.makeText(context,"Nick de usuario no válido",Toast.LENGTH_SHORT).show()
 

@@ -14,6 +14,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class SearchMidpointCityActivity : AppCompatActivity() {
 
@@ -23,12 +25,22 @@ class SearchMidpointCityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_midpoint_city)
 
+        val context = this
+
         val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-        val readerWeb = ReaderWeb(this)
+        val readerWeb = ReaderWeb(context)
 
-        scope.launch {
-            lisCiudades = readerWeb.leerCiudades()
+        try {
+            scope.launch {
+                lisCiudades = readerWeb.leerCiudades()
+            }
+        }catch (e: SocketTimeoutException){
+            AppToast.noInternetConnection(context)
+            startActivity(Intent(this,MenuActivity::class.java))
+        }catch (e: ConnectException){
+            AppToast.noInternetConnection(context)
+            startActivity(Intent(this,MenuActivity::class.java))
         }
 
         val buttonSearch1 : Button = findViewById(R.id.buttonSearch1)

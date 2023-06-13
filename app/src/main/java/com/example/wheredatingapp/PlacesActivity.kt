@@ -1,7 +1,9 @@
 package com.example.wheredatingapp
 
 import android.content.Context
+import android.inputmethodservice.Keyboard.Row
 import android.os.Bundle
+import android.widget.GridLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -40,6 +42,8 @@ import com.example.wheredatingapp.model.Lugar
 import com.example.wheredatingapp.model.reader.ReaderWeb
 import com.example.wheredatingapp.ui.theme.WhereDatingAppTheme
 import kotlinx.coroutines.launch
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class PlacesActivity : ComponentActivity() {
 
@@ -104,40 +108,45 @@ fun PantallaLugares(context: Context){
 
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 30.dp)) {
 
-                Column(Modifier.weight(0.5f)) {
-                    Text(text = "Buscar por ciudad")
-                }
-                Column(
-                    Modifier
-                        .weight(0.5f)
-                        .padding(end = 10.dp)) {
+
+                    Text(text = "Buscar por ciudad ", modifier = Modifier.padding(start = 15.dp))
+
                     TextField(value = ciudad, onValueChange = { newCiudad ->
                         ciudad = newCiudad
-                    }
+                    }, modifier = Modifier.padding(horizontal = 15.dp)
                     )
-                }
-                Column() {
 
 
-                    Button(onClick =
-                    {
-                        scope.launch {
-                            listaLugares = cargarLugares(context, ciudad)
+            }
+
+            RowSeparator(separator = 15)
+
+            Row() {
+                    Button(onClick = {
+
+                        try {
+                            scope.launch {
+                                listaLugares = cargarLugares(context, ciudad)
+                            }
+                        }catch (e : SocketTimeoutException){
+                            AppToast.noInternetConnection(context)
+                        }catch (e : ConnectException){
+                            AppToast.noInternetConnection(context)
                         }
-
-
                     }) {
                         Text(text = "Buscar")
                     }
                 }
+
             }
+
 
             PlacesList(listaLugares = listaLugares)
 
         }
     }
 
-}
+
 
 @Composable
 fun PlacesList(listaLugares : List<Lugar>){

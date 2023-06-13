@@ -15,6 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.EOFException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,33 +62,34 @@ class LoginActivity : AppCompatActivity() {
 
             val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-            scope.launch {
+                scope.launch {
 
-                try {
+                    try {
 
-                    val usuario = ReaderWeb(context).buscarUsuario(userBusqueda)
+                        val usuario = ReaderWeb(context).buscarUsuario(userBusqueda)
 
-                    if (usuario != null) {
+                        if (usuario != null) {
 
-                        launchMain(
-                            usuario
-                        )
+                            launchMain(
+                                usuario
+                            )
 
-                    } else {
-                        toastUserNotFound()
+                        } else {
+                            AppToast.userNotFound(context)
+                        }
+                    } catch (e: EOFException) {
+                        AppToast.userNotFound(context)
+                    } catch (e : SocketTimeoutException){
+                        AppToast.noInternetConnection(context)
+                    } catch (e : ConnectException){
+                        AppToast.noInternetConnection(context)
                     }
-                }catch (e : EOFException){
-                    toastUserNotFound()
                 }
-            }
+
         }else{
-            toastUserNotFound()
+            AppToast.userNotFound(context)
         }
 
-    }
-
-    private fun toastUserNotFound(){
-        Toast.makeText(this, "Datos incorrecto(s)", Toast.LENGTH_SHORT).show()
     }
 
     private fun launchMain(
