@@ -18,6 +18,9 @@ import java.io.EOFException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
+/**
+ * Es la pantalla de inicio, donde se encuentra el login y el acceso al registro
+ */
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         changePassword.setOnClickListener {
-            TODO("Crear Activity para el cambio de contraseña")
+            AppToast.inDevelloping(context)
         }
 
         register.setOnClickListener {

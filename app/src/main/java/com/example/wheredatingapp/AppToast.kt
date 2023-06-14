@@ -4,6 +4,9 @@ import android.content.Context
 import android.widget.Toast
 import java.net.SocketTimeoutException
 
+/**
+ * Es un objeto que almacena varios objetos [Toast] predeterminados listos para ser utilizados en la aplicación
+ */
 object AppToast{
 
     fun inDevelloping(context : Context){

@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 
+/**
+ * Es la pantalla del menú principal
+ */
 class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

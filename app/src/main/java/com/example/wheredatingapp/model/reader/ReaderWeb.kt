@@ -13,6 +13,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * Esta clase permite leer los datos provenientes de la API REST
+ * @property ipServer Es la ip del servidor a donde llama la aplicación
+ * @property url Es la url de la petición HTTP al servidor
+ * @property moshi Es una instancia de la clase [Moshi], la cual permite el mapeo objeto-relacional
+ */
 class ReaderWeb(context: Context) {
 
     private val ipServer = Configuration.ipServer(context)
@@ -22,6 +28,7 @@ class ReaderWeb(context: Context) {
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
+
     suspend fun leerCiudades(): List<Ciudad> {
 
         val retrofit = getRetrofit(url)
@@ -47,16 +54,15 @@ class ReaderWeb(context: Context) {
         return LugaresApi(retrofit).retrofitService.getLugaresbyCity(ciudad)
     }
 
+    /**
+     * Crea una instancia de la clase [Retrofit] para realizar la llamada HTTP
+     * @return Una instancia de la clase [Retrofit]
+     */
     private fun getRetrofit(url : String) : Retrofit {
-
-        val client = OkHttpClient.Builder()
-            .callTimeout(0,TimeUnit.SECONDS)
-            .build()
 
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(url)
-            .client(client)
             .build()
     }
 
@@ -65,21 +71,16 @@ class ReaderWeb(context: Context) {
 }
 
 interface ApiServiceCiudades {
+
     /**
-     * Returns a [List] of [Ciudad] and this method can be called from a Coroutine.
-     * The @GET annotation indicates that the "ciudades" endpoint will be requested with the GET
-     * HTTP method
+     * Devuelve una [List] de objetos [Ciudad].
+     * Este metodo puede llamarse con una corrutina
      */
     @GET("ciudades/all")
     suspend fun getCiudades(): List<Ciudad>
 }
 
 interface ApiServiceUsuarios {
-    /**
-     * Returns a [List] of [Ciudad] and this method can be called from a Coroutine.
-     * The @GET annotation indicates that the "ciudades" endpoint will be requested with the GET
-     * HTTP method
-     */
 
     @GET("usuarios/all")
     suspend fun getUsers(): List<Usuario>

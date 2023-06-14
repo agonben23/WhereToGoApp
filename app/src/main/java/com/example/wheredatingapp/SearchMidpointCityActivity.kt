@@ -9,6 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wheredatingapp.model.Ciudad
+import com.example.wheredatingapp.model.Punto
+import com.example.wheredatingapp.model.ciudadMasProxima
+import com.example.wheredatingapp.model.ciudadMejorCoeficiente
+import com.example.wheredatingapp.model.puntoMedio
 import com.example.wheredatingapp.model.reader.ReaderWeb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -135,7 +139,7 @@ class SearchMidpointCityActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun calculatePosition() : Punto{
+    private fun calculatePosition() : Punto {
 
         val textLat1: TextView = findViewById(R.id.lat1)
         val textLong1: TextView = findViewById(R.id.lon1)

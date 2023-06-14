@@ -16,6 +16,9 @@ import java.io.EOFException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
+/**
+ * Es la pantalla de registro
+ */
 class RegistrationActivity : AppCompatActivity() {
 
     private val context = this

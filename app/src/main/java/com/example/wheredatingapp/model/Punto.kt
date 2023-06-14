@@ -1,16 +1,20 @@
-package com.example.wheredatingapp
+package com.example.wheredatingapp.model
 
-import com.example.wheredatingapp.model.Ciudad
 import kotlin.math.*
 
+/**
+ * Es una data class que almacena puntos geográficos con su latitud y longitud
+ */
 data class Punto(val latitud : Double, val longitud: Double){
     override fun toString() : String{
         return "Latitud : $latitud Longitud : $longitud"
     }
 }
 
-
-fun Collection<Punto>.puntoMedio() : Punto{
+/**
+ * Obtiene el punto intermedio entre uno o varios puntos almacenandolo en un objeto de la clase [Punto]
+ */
+fun Collection<Punto>.puntoMedio() : Punto {
 
     val latitudMedia = this.latitudes().average()
     val longitudMedia = this.longitudes().average()
@@ -19,7 +23,8 @@ fun Collection<Punto>.puntoMedio() : Punto{
 
 }
 
-fun Collection<Punto>.latitudes() : List<Double>{
+
+private fun Collection<Punto>.latitudes() : List<Double>{
 
     val lisLatitudes = mutableListOf<Double>()
 
@@ -32,7 +37,7 @@ fun Collection<Punto>.latitudes() : List<Double>{
 
 }
 
-fun Collection<Punto>.longitudes() : List<Double>{
+private fun Collection<Punto>.longitudes() : List<Double>{
 
     val lisLongitudes = mutableListOf<Double>()
 
@@ -45,14 +50,17 @@ fun Collection<Punto>.longitudes() : List<Double>{
 
 }
 
-fun Pair<Punto,Punto>.occidental(): Punto {
+private fun Pair<Punto, Punto>.occidental(): Punto {
     return this.toList().sortedBy { it.longitud }.first()
 }
 
-fun Pair<Punto,Punto>.oriental(): Punto {
+private fun Pair<Punto, Punto>.oriental(): Punto {
     return this.toList().sortedByDescending { it.longitud }.first()
 }
 
+/**
+ * Obtiene la distancia en kilómetros entre dos puntos
+ */
 fun Pair<Punto, Punto>.distancia() : Double {
 
     val constante = Math.PI / 180
@@ -66,10 +74,10 @@ fun Pair<Punto, Punto>.distancia() : Double {
     val longitudOriental = puntoOriental.longitud * constante
     val longitudOccidental = puntoOccidental.longitud * constante
 
-    //Paso 1 : Multiplicar el seno de la latitud del primer punto por el seno de la latitud del segundo punto
+
     val paso1 = sin(latitud1) * sin(latitud2)
 
-    //Paso 2 :
+
     val paso2 = cos(latitud1) * cos(latitud2)
 
 
@@ -81,6 +89,9 @@ fun Pair<Punto, Punto>.distancia() : Double {
 
 }
 
+/**
+ * Obtiene el coeficiente de validez de una ciudad calculado teniendo en cuenta la distancia y el "tier" (importancia) de la ciudad
+ */
 fun Pair<Punto,Ciudad>.coeficiente() : Double{
 
     val distancia = Pair(this.first,this.second.punto()).distancia()
@@ -90,10 +101,13 @@ fun Pair<Punto,Ciudad>.coeficiente() : Double{
     return distancia * tier.toDouble().pow(2)
 }
 
+/**
+ * Obtiene la ciudad más próxima a un punto
+ */
 fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
 
     var ciudadMasProxima : Ciudad? = null
-    var distancia : Int = 0
+    var distancia = 0
 
     for (ciudad in lisCiudades){
 
@@ -116,6 +130,9 @@ fun Punto.ciudadMasProxima(lisCiudades: ArrayList<Ciudad>) : Pair<Ciudad?,Int> {
 
 }
 
+/**
+ * Obtiene la ciudad con mejor coeficiente de entre una list de ciudades
+ */
 fun Punto.ciudadMejorCoeficiente(lisCiudades: ArrayList<Ciudad>) : Ciudad {
 
     var ciudadMejorCoeficiente : Ciudad? = null
